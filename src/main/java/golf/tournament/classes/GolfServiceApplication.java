@@ -1,4 +1,11 @@
 package golf.tournament.classes;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.SpringApplication;
 
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class GolfServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(GolfServiceApplication.class, args);
+    }
 }

@@ -1,5 +1,5 @@
 package golf.tournament.classes.member;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-
+@Table(name = "members")
 public class Member {
     @Id
     @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue=1)

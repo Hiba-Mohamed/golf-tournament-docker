@@ -1,11 +1,30 @@
-version: '3'
+version: '3.8'
 services:
-  myapp-main:
-    image: golf-docker:latest
-    ports:
-      - 8080:8080
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
     environment:
-      - spring.datasource.url=jdbc:mysql://localhost:3306/golf_docker_2025
-      #- spring.datasource.url=jdbc:mysql://s4-fall-2022.ce2vcezehro2.us-east-1.rds.amazonaws.com/fall_2022
-      - spring.datasource.password=nsIHS936DMA
+      MYSQL_DATABASE: golf_docker_2025
+      MYSQL_ROOT_PASSWORD: nsIHS936DMA
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  myapp-main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: golf-tournament-api
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql:3306/golf_docker_2025
       - spring.datasource.username=root
+      - spring.datasource.password=nsIHS936DMA
+    restart: always
+
+volumes:
+  mysql_data:

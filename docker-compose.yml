@@ -1,11 +1,30 @@
-version: '3'
+version: '3.8'
 services:
-  myapp-main:
-    image: golf-docker:latest
-    ports:
-      - 8080:8080
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
     environment:
-      - spring.datasource.url=jdbc:mysql://localhost:3306/golf_docker_2025
-      #- spring.datasource.url=jdbc:mysql://s4-fall-2022.ce2vcezehro2.us-east-1.rds.amazonaws.com/fall_2022
-      - spring.datasource.password=nsIHS936DMA
-      - spring.datasource.username=root
+      MYSQL_DATABASE: golf_docker_2025       # Database to be created on MySQL startup
+      MYSQL_ROOT_PASSWORD: nsIHS936DMA       # Password for the root user
+    ports:
+      - "3306:3306"                          # Expose MySQL port to the host
+    volumes:
+      - mysql_data:/var/lib/mysql            # Persistent volume to store MySQL data
+
+  myapp-main:
+    build:
+      context: .
+      dockerfile: Dockerfile                 # Dockerfile to build your app's image
+    container_name: golf-tournament-app
+    depends_on:
+      - mysql                                # Ensure MySQL starts first
+    ports:
+      - "8080:8080"                          # Expose your app's port
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql:3306/golf_docker_2025  # Connect to mysql service by name
+      - spring.datasource.username=root      # Use root username for your app
+      - spring.datasource.password=nsIHS936DMA # Use the root password for your app
+    restart: always                           # Restart policy to always restart the container
+
+volumes:
+  mysql_data:                                  # Define a named volume to persist MySQL data

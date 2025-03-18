@@ -3,7 +3,7 @@ post requests for members
 {
     "firstName": "John",
     "lastName": "Doe",
-    "emailAddress": "johndoe@example.com",
+    "emailAddress": "doej@example.com",
     "phoneNumber": "1234567890",
     "startOfMembershipDate": "2025-01-01",
     "durationOfMembershipInDays": 365,

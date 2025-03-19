@@ -26,6 +26,7 @@ Before getting started, ensure you have the following installed:
 
 4. **Start Docker Containers**
    - Ensure Docker Desktop is running.
+   - Make sure ports `3306` and `8080` are not being used by other applications. 
    - Execute the following command:
      ```sh
      docker-compose up --build

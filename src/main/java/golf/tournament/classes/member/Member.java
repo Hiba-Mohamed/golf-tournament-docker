@@ -5,16 +5,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "members")
 public class Member {
     @Id
-    @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue=4)
     @GeneratedValue(generator = "member_sequence")
     private long id;
 
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     private String address;
 
@@ -28,6 +34,17 @@ public class Member {
 
     private int durationOfMembershipInDays;
 
+    public Member() {}
+
+    public Member(String firstName, String lastName, String emailAddress, String phoneNumber, String startOfMembershipDate, int durationOfMembershipInDays, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.startOfMembershipDate = startOfMembershipDate;
+        this.durationOfMembershipInDays = durationOfMembershipInDays;
+        this.address = address;
+    }
 
     public long getId() {
         return id;
@@ -37,12 +54,20 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(){
+        this.lastName = lastName;
     }
 
     public String getAddress() {

@@ -14,8 +14,11 @@ public class MemberService {
     public List<Member> getAllMembers(){ return (List<Member>) memberRepository.findAll();}
 //- Search member by:
 //    -  by name
-    public Member getMemberByName(String memberName){
-        return memberRepository.findByName(memberName);
+    public Member getMemberByFirstName(String memberFirstName){
+        return memberRepository.findByFirstName(memberFirstName);
+    }
+    public Member getMemberByLastName(String memberLastName){
+        return memberRepository.findByLastName(memberLastName);
     }
 //    -  phone number
     public Member getMemberByPhoneNumber(String memberPhoneNumber){

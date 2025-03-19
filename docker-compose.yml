@@ -1,15 +1,16 @@
 version: '3.8'
+
 services:
   mysql:
     image: mysql:8.0
     container_name: mysql-db
     environment:
-      MYSQL_DATABASE: golf_docker_2025
       MYSQL_ROOT_PASSWORD: nsIHS936DMA
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   myapp-main:
     build:
@@ -24,6 +25,7 @@ services:
       - spring.datasource.url=jdbc:mysql://mysql:3306/golf_docker_2025
       - spring.datasource.username=root
       - spring.datasource.password=nsIHS936DMA
+    command: [ "java", "-jar", "app.jar"]
     restart: always
 
 volumes:

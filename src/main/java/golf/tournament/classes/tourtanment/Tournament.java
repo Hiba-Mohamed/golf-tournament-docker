@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "tournaments")
 public class Tournament {
     @Id
-    @SequenceGenerator(name = "tournament_sequence", sequenceName = "tournament_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "tournament_sequence", sequenceName = "tournament_sequence", allocationSize = 1, initialValue=3)
     @GeneratedValue(generator = "tournament_sequence")
     private long id;
 
@@ -32,6 +32,18 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
     private List<Member> participatingMembers;
+
+
+    public  Tournament(){}
+
+    public Tournament(String startDate, String endDate, String location, double entryFee, double cashPrizeAmount, List<Member> participatingMembers) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.entryFee = entryFee;
+        this.cashPrizeAmount = cashPrizeAmount;
+        this.participatingMembers = participatingMembers;
+    }
 
     public long getId() {
         return id;

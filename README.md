@@ -16,15 +16,23 @@ Before getting started, ensure you have the following installed:
 
 2. **Change Directory**
    - Navigate to the project directory.
+  
+3. **Update MySQL Passwords in `docker-compose.yml`
+- Open the `docker-compose.yml` file in the project directory.
+- Locate the two password fields:
+  ```yml
+  environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      - spring.datasource.password=yourpassword
 
-3. **Build the Project**
+4. **Build the Project**
    - Run the following commands:
      ```sh
      mvn install
      mvn clean package
      ```
 
-4. **Start Docker Containers**
+5. **Start Docker Containers**
    - Ensure Docker Desktop is running.
    - Make sure ports `3306` and `8080` are not being used by other applications. 
    - Execute the following command:
@@ -32,7 +40,7 @@ Before getting started, ensure you have the following installed:
      docker-compose up --build
      ```
 
-5. **Verify Running Containers**
+6. **Verify Running Containers**
    - After running the above command, you will see two containers:
      1. **golf-tournament-docker** (MySQL Database)
         - MySQL version: `8.0`
